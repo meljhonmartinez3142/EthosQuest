@@ -1,0 +1,1859 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ETHOSQUEST · When Every Decision Matters</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ========== RESET & GLOBAL ========== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #081A2B;
+      font-family: 'Inter', sans-serif;
+      color: #F8FAFC;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; }
+
+    /* ========== UTILITIES ========== */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .glass-card {
+      background: rgba(15, 42, 61, 0.45);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 2rem;
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(14, 116, 144, 0.08) inset;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(14, 116, 144, 0.5);
+      box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(14, 116, 144, 0.25) inset;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.95rem 2.4rem;
+      border-radius: 3rem;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #F4C95D 0%, #d4a83e 100%);
+      color: #081A2B;
+      box-shadow: 0 0 25px rgba(244, 201, 93, 0.4);
+      border-color: rgba(244, 201, 93, 0.8);
+      font-weight: 800;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #ffd966 0%, #F4C95D 100%);
+      box-shadow: 0 0 35px rgba(244, 201, 93, 0.8);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #F8FAFC;
+      border: 1.5px solid rgba(14, 116, 144, 0.6);
+      backdrop-filter: blur(5px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(14, 116, 144, 0.15);
+      border-color: #0E7490;
+      box-shadow: 0 0 18px rgba(14, 116, 144, 0.4);
+      transform: translateY(-2px);
+    }
+
+    section { padding: 6rem 0; position: relative; }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: all 0.4s ease;
+      background: rgba(8, 26, 43, 0.8);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+    }
+
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      color: #F8FAFC;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px rgba(14, 116, 144, 0.4);
+      transition: all 0.3s;
+    }
+
+    .nav-logo .logo-icon {
+      width: 36px; height: 36px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo .logo-icon svg { width: 100%; height: 100%; filter: drop-shadow(0 0 8px rgba(244, 201, 93, 0.5)); }
+
+    .nav-logo span { color: #F4C95D; font-weight: 800; }
+    .nav-logo:hover { text-shadow: 0 0 30px rgba(244, 201, 93, 0.6); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #94A3B8;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+      letter-spacing: 0.4px;
+      position: relative;
+      text-transform: uppercase;
+    }
+
+    .nav-links a:hover { color: #F8FAFC; }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px; left: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, #0E7490, #F4C95D);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta .btn-primary { padding: 0.6rem 1.8rem; font-size: 0.8rem; letter-spacing: 1px; }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #F8FAFC;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 8rem 0 4rem;
+      overflow: hidden;
+      background: radial-gradient(circle at 25% 35%, rgba(14, 116, 144, 0.2) 0%, transparent 55%),
+                  radial-gradient(circle at 85% 65%, rgba(244, 201, 93, 0.05) 0%, transparent 50%),
+                  #081A2B;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(14, 116, 144, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14, 116, 144, 0.06) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(circle at 50% 50%, black 20%, transparent 75%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, black 20%, transparent 75%);
+    }
+
+    .city-silhouette {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 220px;
+      background: linear-gradient(0deg, #081A2B 25%, transparent 100%);
+      z-index: 2;
+    }
+
+    .city-silhouette::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 100%;
+      background:
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(14, 116, 144, 0.08) 60px, rgba(14, 116, 144, 0.08) 62px),
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(14, 116, 144, 0.04) 40px, rgba(14, 116, 144, 0.04) 42px);
+      mask-image: linear-gradient(to top, black 40%, transparent);
+    }
+
+    .indicator {
+      position: absolute;
+      border-radius: 50%;
+      animation: pulseGlow 4s infinite ease-in-out;
+    }
+
+    .ind-1 { width: 8px; height: 8px; top: 18%; left: 10%; background: #F4C95D; box-shadow: 0 0 25px #F4C95D; }
+    .ind-2 { width: 10px; height: 10px; top: 65%; left: 88%; background: #0E7490; box-shadow: 0 0 25px #0E7490; }
+    .ind-3 { width: 6px; height: 6px; top: 42%; left: 72%; background: #F4C95D; box-shadow: 0 0 20px #F4C95D; }
+    .ind-4 { width: 12px; height: 12px; top: 78%; left: 22%; background: #94A3B8; box-shadow: 0 0 20px #94A3B8; opacity: 0.4; }
+    .ind-5 { width: 5px; height: 5px; top: 30%; left: 55%; background: #0E7490; box-shadow: 0 0 18px #0E7490; }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.15); }
+      100% { opacity: 0.3; transform: scale(1); }
+    }
+
+    .path {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #0E7490, #F4C95D, transparent);
+      opacity: 0.2;
+      filter: blur(0.5px);
+    }
+
+    .path-1 { top: 25%; left: 5%; width: 30%; transform: rotate(8deg); }
+    .path-2 { top: 55%; right: 5%; width: 28%; transform: rotate(-12deg); background: linear-gradient(90deg, transparent, #F4C95D, #0E7490, transparent); }
+    .path-3 { bottom: 20%; left: 30%; width: 40%; transform: rotate(3deg); opacity: 0.15; }
+
+    .marker {
+      position: absolute;
+      width: 20px; height: 20px;
+      border: 2px solid #F4C95D;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      opacity: 0.3;
+    }
+
+    .marker-1 { top: 32%; left: 18%; }
+    .marker-2 { top: 60%; right: 15%; border-color: #0E7490; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      color: #0E7490;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 30px; height: 2px;
+      background: #F4C95D;
+      border-radius: 2px;
+    }
+
+    .hero-title {
+      font-size: 4.5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -2px;
+      color: #F8FAFC;
+      text-shadow: 0 0 50px rgba(14, 116, 144, 0.3);
+    }
+
+    .hero-title .gold {
+      color: #F4C95D;
+      text-shadow: 0 0 50px rgba(244, 201, 93, 0.3);
+    }
+
+    .hero-support {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin-bottom: 1rem;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: #94A3B8;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      line-height: 1.8;
+      border-left: 3px solid #0E7490;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(90deg, rgba(14, 116, 144, 0.05), transparent);
+      border-radius: 0 12px 12px 0;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .hero-cta .btn { padding: 1.1rem 3rem; font-size: 1.05rem; }
+
+    .hero-cta-note {
+      font-size: 0.9rem;
+      color: #94A3B8;
+      font-style: italic;
+      letter-spacing: 0.3px;
+    }
+
+    /* ========== SCENARIO PREVIEW ========== */
+    .scenario-preview {
+      position: relative;
+      z-index: 10;
+      animation: fadeInUp 1.4s cubic-bezier(0.23, 1, 0.32, 1) 0.2s both;
+    }
+
+    .scenario-card {
+      padding: 2.2rem 2rem;
+      border-radius: 2rem;
+      background: rgba(15, 42, 61, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(14, 116, 144, 0.15) inset;
+      transition: all 0.5s ease;
+    }
+
+    .scenario-card:hover {
+      border-color: rgba(244, 201, 93, 0.4);
+      box-shadow: 0 35px 60px -18px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(244, 201, 93, 0.15) inset;
+    }
+
+    .scenario-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #F4C95D;
+      background: rgba(244, 201, 93, 0.1);
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(244, 201, 93, 0.3);
+      margin-bottom: 1.2rem;
+    }
+
+    .scenario-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.3px;
+    }
+
+    .scenario-situation {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+      padding: 0.8rem 1rem;
+      border-left: 2px solid #0E7490;
+      background: rgba(14, 116, 144, 0.06);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .scenario-choices {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .choice {
+      padding: 0.9rem 1.2rem;
+      border-radius: 1rem;
+      background: rgba(8, 26, 43, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .choice:hover {
+      border-color: rgba(14, 116, 144, 0.5);
+      background: rgba(14, 116, 144, 0.1);
+      transform: translateX(4px);
+    }
+
+    .choice-key {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(14, 116, 144, 0.2);
+      border: 1px solid rgba(14, 116, 144, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: #F4C95D;
+      flex-shrink: 0;
+    }
+
+    .scenario-footer {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #F4C95D;
+      text-align: center;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.1);
+      text-transform: uppercase;
+      animation: pulseText 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseText {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+
+    /* ========== WHAT IS ETHOSQUEST ========== */
+    .what-section { background: linear-gradient(180deg, #081A2B 0%, #0b1f30 100%); }
+
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .what-content h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: #F8FAFC;
+      line-height: 1.2;
+    }
+
+    .what-content h2 span { color: #F4C95D; }
+
+    .what-content p {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      font-weight: 300;
+    }
+
+    .what-highlight {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #F4C95D;
+      margin-top: 2rem;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(148, 163, 184, 0.15);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+      text-align: center;
+      text-shadow: 0 0 30px rgba(244, 201, 93, 0.3);
+    }
+
+    .what-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .compass-visual {
+      width: 280px; height: 280px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .compass-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(14, 116, 144, 0.3);
+      animation: rotateSlow 30s linear infinite;
+    }
+
+    .compass-ring:nth-child(2) {
+      inset: 20px;
+      border-color: rgba(244, 201, 93, 0.2);
+      animation-duration: 25s;
+      animation-direction: reverse;
+    }
+
+    .compass-ring:nth-child(3) {
+      inset: 45px;
+      border-color: rgba(148, 163, 184, 0.15);
+      animation-duration: 20s;
+    }
+
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .compass-center {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(14, 116, 144, 0.4), transparent);
+      border: 2px solid rgba(14, 116, 144, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #F4C95D;
+      box-shadow: 0 0 40px rgba(14, 116, 144, 0.4);
+      z-index: 2;
+    }
+
+    .compass-dot {
+      position: absolute;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #F4C95D;
+      box-shadow: 0 0 15px #F4C95D;
+    }
+
+    .compass-dot:nth-child(4) { top: 10px; left: 50%; transform: translateX(-50%); }
+    .compass-dot:nth-child(5) { bottom: 10px; left: 50%; transform: translateX(-50%); background: #0E7490; box-shadow: 0 0 15px #0E7490; }
+    .compass-dot:nth-child(6) { left: 10px; top: 50%; transform: translateY(-50%); }
+    .compass-dot:nth-child(7) { right: 10px; top: 50%; transform: translateY(-50%); background: #0E7490; box-shadow: 0 0 15px #0E7490; }
+
+    /* ========== WHY ========== */
+    .why-section { background: #081A2B; }
+
+    .why-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+
+    .why-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: #F8FAFC;
+      line-height: 1.2;
+    }
+
+    .why-header h2 span { color: #F4C95D; }
+
+    .why-header p {
+      font-size: 1.1rem;
+      color: #94A3B8;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .learning-methods {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .method-tag {
+      padding: 0.6rem 1.6rem;
+      border-radius: 2rem;
+      background: rgba(15, 42, 61, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      color: #94A3B8;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .method-tag:hover {
+      border-color: rgba(14, 116, 144, 0.5);
+      color: #F8FAFC;
+      background: rgba(14, 116, 144, 0.1);
+    }
+
+    .flow-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 3rem 0;
+    }
+
+    .flow-step {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: #F8FAFC;
+      padding: 0.8rem 2.5rem;
+      border-radius: 3rem;
+      background: rgba(15, 42, 61, 0.5);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      transition: all 0.3s;
+    }
+
+    .flow-step:hover {
+      border-color: rgba(244, 201, 93, 0.5);
+      color: #F4C95D;
+      box-shadow: 0 0 25px rgba(244, 201, 93, 0.15);
+    }
+
+    .flow-arrow { color: #0E7490; font-size: 1.5rem; opacity: 0.6; }
+
+    .flow-step.highlight {
+      color: #F4C95D;
+      border-color: rgba(244, 201, 93, 0.4);
+      background: rgba(244, 201, 93, 0.06);
+      box-shadow: 0 0 30px rgba(244, 201, 93, 0.15);
+    }
+
+    /* ========== EXPERIENCE ========== */
+    .experience-section { background: linear-gradient(180deg, #081A2B 0%, #0b1f30 100%); }
+
+    .exp-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .exp-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #F8FAFC;
+      margin-bottom: 1rem;
+    }
+
+    .exp-header h2 span { color: #F4C95D; }
+
+    .exp-header p {
+      font-size: 1.1rem;
+      color: #94A3B8;
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .exp-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.2rem;
+      position: relative;
+    }
+
+    .exp-steps::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 10%;
+      width: 80%;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, #0E7490 0px, #0E7490 6px, transparent 6px, transparent 14px);
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .exp-card {
+      padding: 1.8rem 1.2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      background: rgba(15, 42, 61, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 1.5rem;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .exp-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(244, 201, 93, 0.5);
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.7);
+    }
+
+    .exp-number {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0F2A3D, #081A2B);
+      border: 2px solid #0E7490;
+      color: #F4C95D;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 18px rgba(14, 116, 144, 0.4);
+      transition: all 0.3s;
+    }
+
+    .exp-card:hover .exp-number {
+      border-color: #F4C95D;
+      box-shadow: 0 0 25px rgba(244, 201, 93, 0.6);
+      transform: scale(1.08);
+    }
+
+    .exp-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .exp-desc { font-size: 0.8rem; color: #94A3B8; line-height: 1.5; }
+
+    /* ========== DISASTER & ETHICAL ========== */
+    .scenarios-section { background: #081A2B; }
+
+    .scenarios-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .scenario-type {
+      padding: 3rem 2.5rem;
+      border-radius: 2rem;
+      background: rgba(15, 42, 61, 0.5);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scenario-type::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+    }
+
+    .scenario-type.disaster::before { background: linear-gradient(90deg, #F4C95D, #d4a83e); }
+    .scenario-type.ethical::before { background: linear-gradient(90deg, #0E7490, #0a5c73); }
+
+    .scenario-type:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.8);
+    }
+
+    .scenario-type.disaster:hover { border-color: rgba(244, 201, 93, 0.4); }
+    .scenario-type.ethical:hover { border-color: rgba(14, 116, 144, 0.6); }
+
+    .type-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .scenario-type.disaster .type-icon { color: #F4C95D; }
+    .scenario-type.ethical .type-icon { color: #0E7490; }
+
+    .type-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #F8FAFC;
+    }
+
+    .type-sub {
+      font-size: 1rem;
+      color: #F4C95D;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      font-style: italic;
+    }
+
+    .scenario-type.ethical .type-sub { color: #0E7490; }
+
+    .type-desc {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .type-examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .example-tag {
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: rgba(8, 26, 43, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      color: #94A3B8;
+      transition: all 0.3s;
+    }
+
+    .scenario-type.disaster .example-tag:hover {
+      border-color: #F4C95D;
+      color: #F4C95D;
+    }
+
+    .scenario-type.ethical .example-tag:hover {
+      border-color: #0E7490;
+      color: #0E7490;
+    }
+
+    /* ========== CORE CONCEPT ========== */
+    .core-section {
+      background: #081A2B;
+      text-align: center;
+    }
+
+    .core-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      color: #F8FAFC;
+      letter-spacing: -1px;
+    }
+
+    .core-title span { color: #F4C95D; }
+
+    .core-desc {
+      font-size: 1.1rem;
+      color: #94A3B8;
+      max-width: 650px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .branch-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      margin: 0 auto;
+      max-width: 700px;
+    }
+
+    .branch-node {
+      padding: 1rem 2.5rem;
+      border-radius: 2rem;
+      background: rgba(15, 42, 61, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      z-index: 2;
+    }
+
+    .branch-node:hover {
+      border-color: rgba(14, 116, 144, 0.6);
+      box-shadow: 0 0 25px rgba(14, 116, 144, 0.25);
+    }
+
+    .branch-node.decision {
+      background: rgba(14, 116, 144, 0.15);
+      border-color: rgba(14, 116, 144, 0.5);
+      color: #F4C95D;
+    }
+
+    .branch-arrow {
+      color: #0E7490;
+      font-size: 1.2rem;
+      opacity: 0.7;
+      margin: 0.4rem 0;
+    }
+
+    .branch-split {
+      display: flex;
+      gap: 2rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .branch-choice {
+      padding: 0.8rem 1.8rem;
+      border-radius: 1.5rem;
+      background: rgba(8, 26, 43, 0.7);
+      border: 1px solid rgba(244, 201, 93, 0.3);
+      color: #F4C95D;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+
+    .branch-choice:hover {
+      background: rgba(244, 201, 93, 0.1);
+      box-shadow: 0 0 20px rgba(244, 201, 93, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .branch-merge {
+      margin-top: 0.5rem;
+    }
+
+    .branch-outcome {
+      padding: 1rem 2.5rem;
+      border-radius: 2rem;
+      background: linear-gradient(135deg, rgba(244, 201, 93, 0.1), rgba(14, 116, 144, 0.1));
+      border: 1px solid rgba(244, 201, 93, 0.3);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #F4C95D;
+      letter-spacing: 1px;
+    }
+
+    /* ========== LEARNING ANALYSIS ========== */
+    .analysis-section { background: linear-gradient(180deg, #081A2B 0%, #0b1f30 100%); }
+
+    .analysis-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .analysis-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #F8FAFC;
+      margin-bottom: 1rem;
+    }
+
+    .analysis-header h2 span { color: #F4C95D; }
+
+    .analysis-header p {
+      font-size: 1.05rem;
+      color: #94A3B8;
+      max-width: 650px;
+      margin: 0 auto;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .analysis-card {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 3rem;
+    }
+
+    .analysis-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #F4C95D;
+      background: rgba(244, 201, 93, 0.1);
+      padding: 0.4rem 1.2rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(244, 201, 93, 0.3);
+      margin-bottom: 1.5rem;
+    }
+
+    .analysis-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      margin-bottom: 2rem;
+    }
+
+    .analysis-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .metric {
+      padding: 1.2rem 0.8rem;
+      text-align: center;
+      border-radius: 1.2rem;
+      background: rgba(8, 26, 43, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      transition: all 0.3s;
+    }
+
+    .metric:hover {
+      border-color: rgba(14, 116, 144, 0.5);
+      background: rgba(14, 116, 144, 0.08);
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: #94A3B8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .metric-bar {
+      height: 6px;
+      border-radius: 6px;
+      background: rgba(148, 163, 184, 0.15);
+      overflow: hidden;
+      margin-bottom: 0.4rem;
+    }
+
+    .metric-fill {
+      height: 100%;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #0E7490, #F4C95D);
+    }
+
+    .metric-value {
+      font-size: 0.8rem;
+      color: #F4C95D;
+      font-weight: 700;
+    }
+
+    .analysis-review {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .review-item {
+      padding: 1.2rem 1.5rem;
+      border-radius: 1.2rem;
+      background: rgba(8, 26, 43, 0.5);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: all 0.3s;
+    }
+
+    .review-item:hover {
+      border-color: rgba(244, 201, 93, 0.3);
+      transform: translateX(4px);
+    }
+
+    .review-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(14, 116, 144, 0.15);
+      border: 1px solid rgba(14, 116, 144, 0.4);
+      color: #F4C95D;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .review-content h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.3px;
+    }
+
+    .review-content p {
+      font-size: 0.85rem;
+      color: #94A3B8;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ========== FEATURES ========== */
+    .features-section { background: #081A2B; }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .features-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #F8FAFC;
+      margin-bottom: 1rem;
+    }
+
+    .features-header h2 span { color: #F4C95D; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      padding: 2.2rem 1.8rem;
+      text-align: center;
+      background: rgba(15, 42, 61, 0.5);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: 2rem;
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .feature-card i {
+      font-size: 2rem;
+      color: #F4C95D;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 20px rgba(244, 201, 93, 0.4);
+      transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(244, 201, 93, 0.5);
+      background: rgba(14, 116, 144, 0.12);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    .feature-card:hover i { transform: scale(1.15); }
+
+    .feature-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      letter-spacing: 0.3px;
+    }
+
+    .feature-desc {
+      font-size: 0.85rem;
+      color: #94A3B8;
+      line-height: 1.6;
+    }
+
+    /* ========== REGISTER CTA ========== */
+    .register-section {
+      background: linear-gradient(180deg, #081A2B 0%, #0b1f30 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .register-section::before {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(14, 116, 144, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .register-card {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .register-title {
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      color: #F8FAFC;
+      letter-spacing: -1px;
+    }
+
+    .register-title span { color: #F4C95D; }
+
+    .register-text {
+      font-size: 1.15rem;
+      color: #94A3B8;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .register-card .btn-primary {
+      padding: 1.2rem 4rem;
+      font-size: 1.1rem;
+    }
+
+    .register-note {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #94A3B8;
+      font-style: italic;
+    }
+
+    /* ========== FINAL SECTION ========== */
+    .final-section {
+      background: #081A2B;
+      text-align: center;
+      padding: 6rem 0;
+    }
+
+    .final-title {
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: #F8FAFC;
+      letter-spacing: -2px;
+    }
+
+    .final-title span { color: #F4C95D; }
+
+    .final-text {
+      font-size: 1.2rem;
+      color: #94A3B8;
+      max-width: 650px;
+      margin: 0 auto 3rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .final-brand {
+      margin-top: 3rem;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: #F8FAFC;
+    }
+
+    .final-brand span { color: #F4C95D; }
+
+    .final-tagline {
+      font-size: 1rem;
+      color: #94A3B8;
+      font-style: italic;
+      letter-spacing: 2px;
+      margin-top: 0.5rem;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      text-align: center;
+      padding: 2rem 0 2.5rem;
+      color: #475569;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.08);
+      background: #081A2B;
+    }
+
+    .footer span { color: #94A3B8; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1100px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-title { font-size: 3.5rem; }
+      .what-grid { grid-template-columns: 1fr; }
+      .what-visual { order: -1; }
+      .exp-steps { grid-template-columns: repeat(3, 1fr); }
+      .exp-steps::before { display: none; }
+      .scenarios-grid { grid-template-columns: 1fr; }
+      .core-title { font-size: 2.8rem; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 1.5rem; }
+      .navbar .container { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .nav-cta .btn-primary { padding: 0.5rem 1.2rem; font-size: 0.75rem; }
+      .mobile-menu-toggle { display: block; }
+
+      .hero { padding: 7rem 0 3rem; }
+      .hero-title { font-size: 2.6rem; letter-spacing: -1px; }
+      .hero-support { font-size: 1.05rem; }
+      .hero-desc { font-size: 0.95rem; }
+
+      section { padding: 4.5rem 0; }
+      .what-content h2 { font-size: 2.2rem; }
+      .what-highlight { font-size: 1.2rem; letter-spacing: 2px; }
+      .compass-visual { width: 220px; height: 220px; }
+
+      .why-header h2 { font-size: 2rem; }
+      .flow-step { font-size: 1.3rem; letter-spacing: 3px; padding: 0.7rem 1.8rem; }
+
+      .exp-header h2 { font-size: 2rem; }
+      .exp-steps { grid-template-columns: 1fr 1fr; }
+
+      .core-title { font-size: 2.2rem; }
+      .core-desc { font-size: 1rem; }
+      .branch-split { gap: 1rem; }
+      .branch-choice { padding: 0.7rem 1.3rem; font-size: 0.85rem; }
+
+      .analysis-header h2 { font-size: 2rem; }
+      .analysis-card { padding: 2rem 1.5rem; }
+      .analysis-metrics { grid-template-columns: 1fr 1fr; }
+
+      .features-header h2 { font-size: 2rem; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+
+      .register-card { padding: 3rem 1.8rem; }
+      .register-title { font-size: 2.2rem; }
+      .register-card .btn-primary { padding: 1rem 2.5rem; font-size: 1rem; }
+
+      .final-title { font-size: 2.6rem; }
+      .final-text { font-size: 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2rem; letter-spacing: -0.5px; }
+      .hero-label { font-size: 0.7rem; letter-spacing: 3px; }
+      .hero-cta .btn { width: 100%; padding: 1rem 2rem; font-size: 0.95rem; }
+      .scenario-card { padding: 1.5rem 1.2rem; }
+
+      .exp-steps { grid-template-columns: 1fr; }
+      .analysis-metrics { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+
+      .core-title { font-size: 1.8rem; }
+      .branch-node { font-size: 0.95rem; padding: 0.8rem 1.5rem; }
+      .branch-outcome { font-size: 0.85rem; padding: 0.8rem 1.5rem; }
+
+      .register-title { font-size: 1.8rem; }
+      .final-title { font-size: 2rem; }
+      .final-brand { font-size: 1.1rem; letter-spacing: 3px; }
+    }
+
+    /* Fade-in on scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Compass / branching path / shield inspired logo -->
+            <circle cx="20" cy="20" r="17" stroke="#F4C95D" stroke-width="1.5" opacity="0.6"/>
+            <circle cx="20" cy="20" r="12" stroke="#0E7490" stroke-width="1" opacity="0.8"/>
+            <path d="M20 8 L20 20 L28 26" stroke="#F4C95D" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 20 L12 26" stroke="#0E7490" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="20" cy="20" r="3" fill="#F4C95D"/>
+            <path d="M20 4 L20 8 M20 32 L20 36 M4 20 L8 20 M32 20 L36 20" stroke="#94A3B8" stroke-width="1" opacity="0.4"/>
+          </svg>
+        </div>
+        ETHOS<span>QUEST</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#features">Features</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <button class="mobile-menu-toggle" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="indicator ind-1"></div>
+      <div class="indicator ind-2"></div>
+      <div class="indicator ind-3"></div>
+      <div class="indicator ind-4"></div>
+      <div class="indicator ind-5"></div>
+      <div class="path path-1"></div>
+      <div class="path path-2"></div>
+      <div class="path path-3"></div>
+      <div class="marker marker-1"></div>
+      <div class="marker marker-2"></div>
+      <div class="city-silhouette"></div>
+    </div>
+
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left: Hero Content -->
+        <div class="hero-content">
+          <div class="hero-label">Interactive Learning Simulation</div>
+          <h1 class="hero-title">
+            WHEN EVERY<br>
+            <span class="gold">DECISION</span> MATTERS.
+          </h1>
+          <p class="hero-support">
+            Step into realistic disaster and ethical scenarios. Make the choice. Experience the consequence. Learn from the outcome.
+          </p>
+          <p class="hero-desc">
+            EthosQuest provides students with a safe and interactive environment where they can practice decision-making, explore different outcomes, and develop greater awareness of disaster preparedness and ethical responsibility.
+          </p>
+          <div class="hero-cta">
+            <a href="https://forms.gle/LiU75Y9uNVrSwbNz8" class="btn btn-primary">Register Now</a>
+            <span class="hero-cta-note">Begin your first quest and discover where your decisions lead.</span>
+          </div>
+        </div>
+
+        <!-- Right: Floating Scenario Preview -->
+        <div class="scenario-preview">
+          <div class="scenario-card">
+            <div class="scenario-badge">SCENARIO 01</div>
+            <h3 class="scenario-title">EARTHQUAKE: SCHOOL EVACUATION</h3>
+            <p class="scenario-situation">
+              "The ground begins to shake during class. Several students panic while the emergency alarm sounds."
+            </p>
+            <div class="scenario-choices">
+              <div class="choice">
+                <div class="choice-key">A</div>
+                Evacuate immediately
+              </div>
+              <div class="choice">
+                <div class="choice-key">B</div>
+                Help an injured classmate first
+              </div>
+              <div class="choice">
+                <div class="choice-key">C</div>
+                Wait for further instructions
+              </div>
+            </div>
+            <div class="scenario-footer">
+              Your decision changes what happens next.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHAT IS ETHOSQUEST ========== -->
+  <section id="about" class="what-section">
+    <div class="container">
+      <div class="what-grid">
+        <div class="what-content fade-in">
+          <h2>WHAT IS <span>ETHOSQUEST?</span></h2>
+          <p>
+            EthosQuest is an interactive scenario-based learning system designed to help students practice disaster preparedness and ethical decision-making through realistic fictional situations.
+          </p>
+          <p>
+            Rather than simply reading what they should do, students are placed in situations where they must think, choose, respond, and experience the possible consequences of their decisions.
+          </p>
+          <div class="what-highlight">
+            THINK. CHOOSE. RESPOND. LEARN.
+          </div>
+        </div>
+        <div class="what-visual fade-in">
+          <div class="compass-visual">
+            <div class="compass-ring"></div>
+            <div class="compass-ring"></div>
+            <div class="compass-ring"></div>
+            <div class="compass-center">
+              <i class="fas fa-compass"></i>
+            </div>
+            <div class="compass-dot"></div>
+            <div class="compass-dot"></div>
+            <div class="compass-dot"></div>
+            <div class="compass-dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHY ETHOSQUEST EXISTS ========== -->
+  <section class="why-section">
+    <div class="container">
+      <div class="why-header fade-in">
+        <h2>LEARNING IS DIFFERENT WHEN YOU <span>EXPERIENCE IT.</span></h2>
+        <p>Students commonly learn through lectures, discussions, reading materials, quizzes, and classroom activities. EthosQuest adds a new dimension.</p>
+      </div>
+
+      <div class="learning-methods fade-in">
+        <div class="method-tag">Lectures</div>
+        <div class="method-tag">Discussions</div>
+        <div class="method-tag">Reading Materials</div>
+        <div class="method-tag">Quizzes</div>
+        <div class="method-tag">Classroom Activities</div>
+      </div>
+
+      <div style="text-align:center; max-width: 750px; margin: 0 auto 2rem;" class="fade-in">
+        <p style="font-size:1.1rem; color:#cbd5e1; line-height:1.8; font-weight:300;">
+          EthosQuest provides a safe environment where students can explore realistic situations without real-world risk. Each scenario gives them an opportunity to make decisions, observe possible consequences, and reflect on the outcome.
+        </p>
+      </div>
+
+      <div class="flow-visual fade-in">
+        <div class="flow-step">LEARN</div>
+        <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+        <div class="flow-step">EXPERIENCE</div>
+        <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+        <div class="flow-step">DECIDE</div>
+        <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+        <div class="flow-step">RESPOND</div>
+        <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+        <div class="flow-step">REFLECT</div>
+        <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+        <div class="flow-step highlight">LEARN AGAIN</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== THE ETHOSQUEST EXPERIENCE ========== -->
+  <section id="how" class="experience-section">
+    <div class="container">
+      <div class="exp-header fade-in">
+        <h2>YOUR QUEST BEGINS WITH A <span>SITUATION.</span></h2>
+        <p>Five cinematic steps that transform learning into an experience.</p>
+      </div>
+
+      <div class="exp-steps">
+        <div class="exp-card fade-in">
+          <div class="exp-number">01</div>
+          <div class="exp-title">Enter</div>
+          <div class="exp-desc">Step into the scenario. Experience a fictional situation involving a disaster, responsibility, conflict, or difficult decision.</div>
+        </div>
+        <div class="exp-card fade-in">
+          <div class="exp-number">02</div>
+          <div class="exp-title">Think</div>
+          <div class="exp-desc">Consider what matters. Evaluate the situation, risks, responsibilities, and possible outcomes.</div>
+        </div>
+        <div class="exp-card fade-in">
+          <div class="exp-number">03</div>
+          <div class="exp-title">Choose</div>
+          <div class="exp-desc">Make your decision. Select the response you believe is most appropriate.</div>
+        </div>
+        <div class="exp-card fade-in">
+          <div class="exp-number">04</div>
+          <div class="exp-title">Experience</div>
+          <div class="exp-desc">See what happens next. Your decision influences the simulated situation and creates a possible path forward.</div>
+        </div>
+        <div class="exp-card fade-in">
+          <div class="exp-number">05</div>
+          <div class="exp-title">Learn</div>
+          <div class="exp-desc">Reflect on the outcome. Review your decision, understand the consequences, and identify what you can improve.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DISASTER & ETHICAL SCENARIOS ========== -->
+  <section class="scenarios-section">
+    <div class="container">
+      <div class="scenarios-grid">
+        <!-- Disaster Scenarios -->
+        <div class="scenario-type disaster fade-in">
+          <div class="type-icon"><i class="fas fa-house-flood-water"></i></div>
+          <h3 class="type-title">DISASTER SCENARIOS</h3>
+          <div class="type-sub">Prepare for the unexpected.</div>
+          <p class="type-desc">
+            Practice responding to challenging situations where preparation, safety, and decision-making matter.
+          </p>
+          <div class="type-examples">
+            <span class="example-tag">Earthquakes</span>
+            <span class="example-tag">Floods</span>
+            <span class="example-tag">Typhoons</span>
+            <span class="example-tag">Fires</span>
+            <span class="example-tag">Landslides</span>
+          </div>
+        </div>
+
+        <!-- Ethical Scenarios -->
+        <div class="scenario-type ethical fade-in">
+          <div class="type-icon"><i class="fas fa-scale-balanced"></i></div>
+          <h3 class="type-title">ETHICAL SCENARIOS</h3>
+          <div class="type-sub">When the right choice isn't always obvious.</div>
+          <p class="type-desc">
+            Explore situations where students must consider responsibility, consequences, fairness, and the people affected by their decisions.
+          </p>
+          <div class="type-examples">
+            <span class="example-tag">Academic Honesty</span>
+            <span class="example-tag">Group Conflicts</span>
+            <span class="example-tag">Helping Others</span>
+            <span class="example-tag">Personal Responsibility</span>
+            <span class="example-tag">Digital Responsibility</span>
+            <span class="example-tag">Conflicting Responsibilities</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CORE CONCEPT ========== -->
+  <section class="core-section">
+    <div class="container">
+      <h2 class="core-title fade-in">
+        ONE CHOICE.<br>
+        <span>A DIFFERENT PATH.</span>
+      </h2>
+      <p class="core-desc fade-in">
+        EthosQuest uses branching scenarios to demonstrate how different decisions can lead to different situations and outcomes.
+      </p>
+
+      <div class="branch-visual fade-in">
+        <div class="branch-node">SITUATION</div>
+        <div class="branch-arrow"><i class="fas fa-arrow-down"></i></div>
+        <div class="branch-node decision">YOUR DECISION</div>
+        <div class="branch-arrow"><i class="fas fa-arrow-down"></i></div>
+        <div class="branch-split">
+          <div class="branch-choice">CHOICE A</div>
+          <div class="branch-choice">CHOICE B</div>
+          <div class="branch-choice">CHOICE C</div>
+        </div>
+        <div class="branch-arrow" style="margin-top:0.8rem;"><i class="fas fa-arrow-down"></i></div>
+        <div class="branch-node" style="background:rgba(14,116,144,0.15); border-color:rgba(14,116,144,0.5);">DIFFERENT CONSEQUENCES</div>
+        <div class="branch-arrow"><i class="fas fa-arrow-down"></i></div>
+        <div class="branch-outcome">DIFFERENT OUTCOMES</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LEARNING FROM YOUR DECISIONS ========== -->
+  <section class="analysis-section">
+    <div class="container">
+      <div class="analysis-header fade-in">
+        <h2>EVERY OUTCOME HAS A <span>LESSON.</span></h2>
+        <p>The purpose is not simply to determine whether a choice was right or wrong. EthosQuest helps students understand why different responses may lead to different consequences.</p>
+      </div>
+
+      <div class="glass-card analysis-card fade-in">
+        <div class="analysis-badge">QUEST COMPLETE</div>
+        <h3 class="analysis-title">DECISION ANALYSIS</h3>
+
+        <div class="analysis-metrics">
+          <div class="metric">
+            <div class="metric-label">Safety Awareness</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:85%"></div></div>
+            <div class="metric-value">85%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Preparedness</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:70%"></div></div>
+            <div class="metric-value">70%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Responsibility</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:90%"></div></div>
+            <div class="metric-value">90%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Ethical Reasoning</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:78%"></div></div>
+            <div class="metric-value">78%</div>
+          </div>
+        </div>
+
+        <div class="analysis-review">
+          <div class="review-item">
+            <div class="review-icon"><i class="fas fa-check"></i></div>
+            <div class="review-content">
+              <h4>YOUR RESPONSE</h4>
+              <p>You chose to evacuate immediately while alerting others nearby.</p>
+            </div>
+          </div>
+          <div class="review-item">
+            <div class="review-icon"><i class="fas fa-clock-rotate-left"></i></div>
+            <div class="review-content">
+              <h4>WHAT HAPPENED</h4>
+              <p>The evacuation proceeded, but one student was left behind in the initial rush.</p>
+            </div>
+          </div>
+          <div class="review-item">
+            <div class="review-icon"><i class="fas fa-lightbulb"></i></div>
+            <div class="review-content">
+              <h4>WHAT YOU CAN LEARN</h4>
+              <p>Consider a quick headcount before moving and assign a buddy system for safer evacuations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="features-header fade-in">
+        <h2>CORE <span>FEATURES</span></h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <i class="fas fa-cubes"></i>
+          <div class="feature-title">Interactive Scenarios</div>
+          <div class="feature-desc">Experience fictional situations instead of simply reading about them.</div>
+        </div>
+        <div class="feature-card fade-in">
+          <i class="fas fa-code-branch"></i>
+          <div class="feature-title">Branching Decisions</div>
+          <div class="feature-desc">Explore different paths based on your choices.</div>
+        </div>
+        <div class="feature-card fade-in">
+          <i class="fas fa-chart-line"></i>
+          <div class="feature-title">Simulated Consequences</div>
+          <div class="feature-desc">See how decisions can influence what happens next.</div>
+        </div>
+        <div class="feature-card fade-in">
+          <i class="fas fa-clock-rotate-left"></i>
+          <div class="feature-title">Decision History</div>
+          <div class="feature-desc">Review the choices you made throughout your quest.</div>
+        </div>
+        <div class="feature-card fade-in">
+          <i class="fas fa-graduation-cap"></i>
+          <div class="feature-title">Learning Analysis</div>
+          <div class="feature-desc">Reflect on your strengths, areas for improvement, and key lessons.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== REGISTER CTA ========== -->
+  <section id="register" class="register-section">
+    <div class="container">
+      <div class="glass-card register-card fade-in">
+        <h2 class="register-title">YOUR QUEST <span>STARTS HERE.</span></h2>
+        <p class="register-text">Enter EthosQuest and begin exploring situations where every decision creates a path.</p>
+        <div class="register-note">Create your account and begin your first scenario.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FINAL SECTION ========== -->
+  <section class="final-section">
+    <div class="container">
+      <h2 class="final-title fade-in">WHAT WILL <span>YOU CHOOSE?</span></h2>
+      <p class="final-text fade-in">Every situation presents a challenge. Every decision creates a path. Every outcome is an opportunity to learn.</p>
+      <div class="final-brand fade-in">ETHOS<span>QUEST</span></div>
+      <div class="final-tagline fade-in">Choose. Respond. Learn.</div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <div class="footer">
+    <div class="container">
+      <span>ETHOSQUEST</span> — An interactive simulation for ethical and disaster response education.
+    </div>
+  </div>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    (function() {
+      // Fade-in on scroll
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href === '#') return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Navbar background on scroll
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.style.background = 'rgba(8, 26, 43, 0.94)';
+          navbar.style.boxShadow = '0 10px 30px -10px rgba(0, 0, 0, 0.8)';
+        } else {
+          navbar.style.background = 'rgba(8, 26, 43, 0.8)';
+          navbar.style.boxShadow = 'none';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
